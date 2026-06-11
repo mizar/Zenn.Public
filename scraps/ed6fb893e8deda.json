@@ -1,0 +1,23 @@
+{
+  "title": "Advent Calendar Contest 2025",
+  "closed": false,
+  "archived": false,
+  "created_at": "2026-01-07",
+  "comments": [
+    {
+      "author": "mizar",
+      "created_at": "2026-01-07",
+      "body_markdown": "Advent Calendar Contest 2025 (12/4出題分) - Max Weighted Floor of Linear\nhttps://yukicoder.me/problems/no/3397\n\n## 問題文\n\n$T$ 個の問題が与えられます。\n各問題について、 正の整数 $N,M$ と 整数 $A,B,C,D$ が与えられます。\n\n整数 $x$ を $0 \\leq x \\lt N$ の範囲で動かした時、 $Ax + B\\left\\lfloor \\dfrac{Cx + D}{M} \\right\\rfloor$ が取りうる値の最大値を求めてください。\n\n$\\lfloor\\cdot\\rfloor$ は床関数を表します。床関数とは、与えられた数を超えない最大の整数を返す関数です。\n\n## 制約\n\n* $1 \\leq T \\leq 10^5$\n* $1 \\leq N,M \\leq 10^9$\n* $-10^9 \\leq A,B \\leq 10^9$\n* $0 \\leq C,D \\lt M$\n\n## 実行時間制限: 2 秒、メモリ制限: 512 MB\n\nコンピュータは概ね、 $1$ 秒間に $10^9$ 回程度の基本的な計算を実行できます。\n最大で $10^5$ 個の問題が与えられるため、各問題に対して概ね $20000$ 回程度の基本的な計算を実行できます。\n"
+    },
+    {
+      "author": "mizar",
+      "created_at": "2026-01-07",
+      "body_markdown": "Advent Calendar Contest 2025 (12/5出題分) - Accuracy of Integer Division Approximate Function 2\nhttps://yukicoder.me/problems/no/3398\n\n## ストーリー\n\nみざー君は、 $0\\leq x\\lt 2^{128}$ の範囲で $\\lfloor x/10^{19}\\rfloor$ を高速に計算する方法を考えています。\n\nみざー君は、 $10^{19}$ で切り捨て除算を行う代わりに、まずは $x$ を $2^{64}$ で切り捨て除算し、次に $\\lfloor 2^{128}/10^{19}\\rfloor$ で乗算し、最後に $2^{64}$ で切り捨て除算を行う方法を検討しました。想定する環境では、 $10^{19}$ での切り捨て除算よりも $2^{64}$ での切り捨て除算と整数乗算の方が高速に実行できるためです。\n\nこの方法について、起こり得る誤差の最大値を評価しました。すなわち、 $D=10^{19},A=2^{64},B=2^{64}$ とした時、非負整数 $x$ に対して次のように定義される関数 $\\Delta(D,A,B,x)$ を考えました：\n\n* $\\Delta(D,A,B,x) := \\left\\lfloor\\dfrac{x}{D}\\right\\rfloor-\\left\\lfloor\\left\\lfloor\\dfrac{x}{A}\\right\\rfloor\\cdot\\dfrac{\\lfloor AB/D\\rfloor}{B}\\right\\rfloor$\n* $\\Delta(10^{19},2^{64},2^{64},x) = \\left\\lfloor\\dfrac{x}{10^{19}}\\right\\rfloor-\\left\\lfloor\\left\\lfloor\\dfrac{x}{2^{64}}\\right\\rfloor\\cdot\\dfrac{34028236692093846346}{2^{64}} \\right\\rfloor$\n* $\\lfloor 2^{128}/10^{19}\\rfloor = 34028236692093846346$\n\n$D=10^{19},A=2^{64},B=2^{64}$ における誤差関数 $\\Delta$ を評価すると、\n\n* $0\\leq x\\lt 156624322790854844120000000000000000000$ のとき、 $0\\leq\\Delta\\leq 2$ が保証されます。\n* $x = 156624322790854844120000000000000000000$ のとき、 $\\Delta=3$ です。\n* $0\\leq x\\lt 1164985662416622730250000000000000000000$ のとき、 $0\\leq\\Delta\\leq 3$ が保証されます。\n* $x = 1164985662416622730250000000000000000000$ のとき、 $\\Delta=4$ です。\n* $2^{128}\\lt 1164985662416622730250000000000000000000$ なので、 $0\\leq x \\lt 2^{128}$ の範囲では $0\\leq\\Delta\\leq 3$ が保証されます。\n\nみざー君は、誤差 $\\Delta$ が 非負整数 $K$ を超えるような最小の\n$x$ を求める問題に興味を持ち、この問題を次のように定義しました。\n\n（ $D=10^{19},A=2^{64},B=2^{64}$ は今回の問題では入力制約の範囲外です ）\n\n## 問題文\n\n$T$ 個の問題が与えられます。\n\n各問題について、 正の整数 $D,A,B$ と 非負整数 $K$ が与えられます。\n\n関数 $\\Delta(D,A,B,x)$ を次で定義します:\n$$\\Delta(D,A,B,x) := \\left\\lfloor\\dfrac{x}{D}\\right\\rfloor-\\left\\lfloor\\left\\lfloor\\dfrac{x}{A}\\right\\rfloor\\cdot\\dfrac{\\lfloor AB/D\\rfloor}{B}\\right\\rfloor.$$\n\n$K \\lt \\Delta(D,A,B,x)$ を満たす **最小の非負整数** $x$ を求めて下さい。\nそのような非負整数 $x$ が存在しない場合は、代わりに $-1$ を出力してください。\n\n$\\lfloor\\cdot\\rfloor$ は床関数を表します。床関数とは、与えられた数を超えない最大の整数を返す関数です。\n\n## 入力制約\n\n* $1 \\leq T \\leq 100$\n* $1 \\leq D,A,B \\leq 10^{18}$\n* $0 \\leq K \\leq 64$\n\n## 実行時間制限: 2 秒、メモリ制限: 512 MB\n\nコンピュータは概ね、 $1$ 秒間に $10^9$ 回程度の基本的な計算を実行できます。\n最大で $100$ 個の問題が与えられるため、各問題に対して概ね $2 \\times 10^7$ 回程度の基本的な計算を実行できます。\n"
+    },
+    {
+      "author": "mizar",
+      "created_at": "2026-01-07",
+      "body_markdown": "Advent Calendar Contest 2025 (12/5出題分) - Accuracy of Integer Division Approximate Function 2\nhttps://yukicoder.me/problems/no/3398\n\n## 問題文\n\n$T$ 個の問題が与えられます。\n\n各問題について、 正の整数 $D,A,B$ と 非負整数 $K$ が与えられます。\n\n関数 $\\Delta(D,A,B,x)$ を次で定義します:\n$$\\Delta(D,A,B,x) := \\left\\lfloor\\dfrac{x}{D}\\right\\rfloor-\\left\\lfloor\\left\\lfloor\\dfrac{x}{A}\\right\\rfloor\\cdot\\dfrac{\\lfloor AB/D\\rfloor}{B}\\right\\rfloor.$$\n\n$K \\lt \\Delta(D,A,B,x)$ を満たす **最小の非負整数** $x$ を求めて下さい。\nそのような非負整数 $x$ が存在しない場合は、代わりに $-1$ を出力してください。\n\n$\\lfloor\\cdot\\rfloor$ は床関数を表します。床関数とは、与えられた数を超えない最大の整数を返す関数です。\n\n## 入力制約\n\n* $1 \\leq T \\leq 100$\n* $1 \\leq D,A,B \\leq 10^{18}$\n* $0 \\leq K \\leq 64$\n\n## 実行時間制限: 2 秒、メモリ制限: 512 MB\n\nコンピュータは概ね、 $1$ 秒間に $10^9$ 回程度の基本的な計算を実行できます。\n最大で $100$ 個の問題が与えられるため、各問題に対して概ね $2 \\times 10^7$ 回程度の基本的な計算を実行できます。\n"
+    }
+  ]
+}

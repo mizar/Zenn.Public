@@ -1,0 +1,25 @@
+{
+  "title": "floor関数と加算・除算",
+  "closed": false,
+  "archived": false,
+  "created_at": "2026-01-28",
+  "comments": [
+    {
+      "author": "mizar",
+      "created_at": "2026-01-28",
+      "body_markdown": "floor関数 $\\lfloor x\\rfloor$ の定義\n\n* 定義1: 実数 $x$ に対し、 $\\lfloor x\\rfloor \\in\\mathbb{Z}$ で、かつ $(\\forall n\\in\\mathbb{Z})(n\\le x\\iff n\\le\\lfloor x\\rfloor)$\n* 定義2: 実数 $x$ に対し、 $\\lfloor x\\rfloor \\in\\mathbb{Z}$ で、かつ $\\lfloor x\\rfloor \\le x \\lt \\lfloor x\\rfloor+1$ を満たす\n* 定義2 ⇒ 定義1：\n  $n\\le \\lfloor x\\rfloor \\Rightarrow n\\le x$（推移律）と、\n  $n\\le x \\Rightarrow n\\le \\lfloor x\\rfloor$（もし $n\\gt\\lfloor x\\rfloor$ なら $n\\ge \\lfloor x\\rfloor+1 > x$ で矛盾）から同値が出ます。\n* 定義1 ⇒ 定義2：\n  $n=\\lfloor x\\rfloor$ を入れて $\\lfloor x\\rfloor\\le x$。\n  さらに $\\lfloor x\\rfloor+1 \\le x$ を仮定すると、定義1より $\\lfloor x\\rfloor+1 \\le \\lfloor x\\rfloor$ となり矛盾。よって $x<\\lfloor x\\rfloor+1$。\n"
+    },
+    {
+      "author": "mizar",
+      "created_at": "2026-01-28",
+      "body_markdown": "## 補題1\n$x\\in\\mathbb{R},\\quad z\\in\\mathbb{Z}$ とする。\n\n$$\\lfloor x+z\\rfloor=\\lfloor x\\rfloor+z$$\n\n## 補題1の証明1\n$n=\\lfloor x\\rfloor$ とおくと、床の定義より\n$$n \\le x < n+1.$$\n両辺に整数 $z$ を足して\n$$n+z \\le x+z < n+z+1.$$\nここで $n+z$ は整数で、 $x+z$ はその区間 $\\lbrack n+z,\\;n+z+1)$ に入っているから\n$$\\lfloor x+z\\rfloor = n+z = \\lfloor x\\rfloor + z.$$\n\n## 補題1の証明2\n\n$x\\in\\mathbb R,\\ z\\in\\mathbb Z$ とする。示すべきは\n$$\\lfloor x+z\\rfloor=\\lfloor x\\rfloor+z$$\nである。\n\nここで $A:=\\lfloor x+z\\rfloor$, $B:=\\lfloor x\\rfloor+z$ とおく。\n整数同士の等式 $A=B$ を示すには、任意の整数 $c$ に対して\n$$c\\le A \\iff c\\le B$$\nが成り立つことを示せば十分である（これは順序の反対称性から従う：\nもし全ての $c$ で $c\\le A\\iff c\\le B$ なら、特に $c=A$ で $A\\le B$、$c=B$ で $B\\le A$ が得られ、よって $A=B$）。\n\nそこで任意の $c\\in\\mathbb Z$ を取る。\n\n床関数の定義（同値形）より、任意の実数 $y$ と整数 $c$ について\n$$c\\le \\lfloor y\\rfloor \\iff c\\le y$$\nが成り立つ（$\\lfloor y\\rfloor$ は「$y$ 以下の最大の整数」なので、整数 $c$ が $\\lfloor y\\rfloor$ 以下であることと、$c$ が $y$ 以下であることは同値）。\n\nこれを $y=x+z$ に適用すると\n$$c\\le \\lfloor x+z\\rfloor \\iff c\\le x+z$$\nとなる。さらに両辺から $z$ を引けば\n$$c\\le x+z \\iff c-z \\le x$$\nであるから、\n$$c\\le \\lfloor x+z\\rfloor \\iff c-z \\le x \\tag{1}$$\n\n同様に\n$$c\\le \\lfloor x\\rfloor+z \\iff c-z \\le \\lfloor x\\rfloor$$\nである。そして先ほどと同じ床の定義（同値形）を $y=x$ に適用すると\n$$c-z \\le \\lfloor x\\rfloor \\iff c-z \\le x$$\nよって\n$$c\\le \\lfloor x\\rfloor+z \\iff c-z \\le x \\tag{2}$$\n\n$(1)$ と $(2)$ より、任意の整数 $c$ について\n$$c\\le \\lfloor x+z\\rfloor \\iff c\\le \\lfloor x\\rfloor+z$$\nが成り立つ。したがって上で述べた理由（任意の下界比較が一致すれば整数は等しい）により\n$$\\lfloor x+z\\rfloor=\\lfloor x\\rfloor+z$$\nが示された。\n",
+      "body_updated_at": "2026-01-28"
+    },
+    {
+      "author": "mizar",
+      "created_at": "2026-01-28",
+      "body_markdown": "## 補題2\n$x\\in\\mathbb{R},\\quad z\\in\\mathbb{Z},\\quad a,b\\in\\mathbb{N}\\setminus\\lbrace 0\\rbrace$ とする。\n\n$$\\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor=\\left\\lfloor\\cfrac{\\lfloor x/a\\rfloor}{b}\\right\\rfloor=\\left\\lfloor\\cfrac{\\lfloor x/b\\rfloor}{a}\\right\\rfloor$$\n\n## 補題2の証明\n$\\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor\\leq\\cfrac{x}{ab}\\lt\\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor+1$ より、$\\cfrac{x}{ab}=\\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor+s\\quad(0\\leq s\\lt 1)$ と置くと\n\n$$\n\\begin{aligned}\n\\left\\lfloor\\cfrac{\\left\\lfloor x/a\\right\\rfloor}{b}\\right\\rfloor&=\\left\\lfloor\\cfrac{\\lfloor ab(\\left\\lfloor x/ab\\right\\rfloor+s)/a\\rfloor}{b}\\right\\rfloor\\quad\\because\\ x=ab\\left(\\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor+s\\right)\\\\\n&=\\left\\lfloor\\cfrac{\\left\\lfloor b\\left\\lfloor x/ab\\right\\rfloor+bs\\right\\rfloor}{b}\\right\\rfloor\\\\\n&=\\left\\lfloor\\cfrac{b\\left\\lfloor x/ab\\right\\rfloor+\\left\\lfloor bs\\right\\rfloor}{b}\\right\\rfloor\\quad\\because\\ b\\lfloor x/ab\\rfloor\\in\\mathbb{Z}\\\\\n&=\\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor+\\left\\lfloor\\cfrac{\\left\\lfloor bs\\right\\rfloor}{b}\\right\\rfloor\\quad\\because\\ \\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor\\in\\mathbb{Z}\\\\\n&=\\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor\\quad\\because\\ 0\\leq\\left\\lfloor bs\\right\\rfloor\\lt b,\\ 0=\\left\\lfloor\\cfrac{\\left\\lfloor bs\\right\\rfloor}{b}\\right\\rfloor\\\\\n\\end{aligned}\n$$\n\n$\\left\\lfloor\\cfrac{\\lfloor x/b\\rfloor}{a}\\right\\rfloor$ についても同様にして、 $\\left\\lfloor\\cfrac{\\lfloor x/a\\rfloor}{b}\\right\\rfloor=\\left\\lfloor\\cfrac{\\lfloor x/b\\rfloor}{a}\\right\\rfloor=\\left\\lfloor\\cfrac{x}{ab}\\right\\rfloor\\quad\\square$",
+      "body_updated_at": "2026-01-28"
+    }
+  ]
+}
